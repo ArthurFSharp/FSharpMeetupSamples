@@ -1,0 +1,68 @@
+<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="F# WPF TODOList" Height="350" Width="525" x:Name="TodoWindow">
+
+    <Window.Resources>
+        <Style x:Key="BodyTextBlock" TargetType="{x:Type TextBlock}">
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+        <Style x:Key="TitleTextBlock" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource BodyTextBlock}">
+            <Setter Property="FontSize" Value="30" />
+        </Style>
+    </Window.Resources>
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Margin="20">
+            <TextBlock Text="My TODO list"
+                       Style="{StaticResource TitleTextBlock}" />
+            <ListView ItemsSource="{Binding Tasks}"
+                      HorizontalContentAlignment="Stretch">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <DockPanel>
+                            <CheckBox IsChecked="{Binding Done}"
+                                      DockPanel.Dock="Left" />
+                            <TextBlock Text="{Binding Name}"
+                                       DockPanel.Dock="Left" />
+                            <Button Content="X"
+                                    Background="Red"
+                                    DockPanel.Dock="Right"
+                                    Width="20"
+                                    HorizontalAlignment="Right"
+                                    Command="{Binding ElementName=TodoWindow, Path=DataContext.RemoveElementCommand}"
+                                    CommandParameter="{Binding}" />
+                        </DockPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <TextBlock Text="New task"
+                       Style="{StaticResource BodyTextBlock}" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+                <TextBox Grid.Column="0"
+                         Text="{Binding NewTask, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <Button Content="Add" Grid.Column="1"
+                        Command="{Binding AddTaskCommand}" />
+            </Grid>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="You are going to add:"
+                       Foreground="DarkGray" />
+                <TextBlock Text="{Binding NewTask}" />
+            </StackPanel>
+            
+            <Button Content="Clear selected tasks"
+                    Width="150"
+                    HorizontalAlignment="Left"
+                    Command="{Binding ClearCompletedCommand}" />
+        </StackPanel>
+    </Grid>
+</Window>
