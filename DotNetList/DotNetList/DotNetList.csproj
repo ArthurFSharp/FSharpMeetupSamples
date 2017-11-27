@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FSharp.Core, Version=4.4.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="FSharp.Core, Version=4.4.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -84,6 +84,10 @@
     <ProjectReference Include="..\DotNetList.Core\DotNetList.Core.fsproj">
       <Project>{4a12d5c7-3f66-47b0-90b9-6ec9e1ef6616}</Project>
       <Name>DotNetList.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DotNetList.FunctionalExtensions\DotNetList.FunctionalExtensions.csproj">
+      <Project>{1ea3f546-bdb8-49ba-94f1-664e1eceb350}</Project>
+      <Name>DotNetList.FunctionalExtensions</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

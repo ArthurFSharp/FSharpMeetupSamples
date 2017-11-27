@@ -9,12 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DotNetList.Core;
 using Microsoft.FSharp.Collections;
+using DotNetList.FunctionalExtensions;
 
 namespace DotNetList
 {
     public partial class Form1 : Form
     {
         private List<string> Elements = new List<string>();
+        private MyList myList = new MyList();
 
         private Mode mode = Mode.Insert;
 
@@ -30,19 +32,17 @@ namespace DotNetList
                 string newElement = textBox1.Text;
                 if (!string.IsNullOrWhiteSpace(newElement))
                 {
-                    
-                    var newList = ListManipulation.AddElement<string>(newElement,
-                        ListModule.OfSeq(Elements));
-                    Elements = newList.ToList();
-                    UpdateList();
+                    if (myList.FindElementInList(newElement, Elements).IsNone())
+                    {
+                        Elements = myList.AddElementToList(newElement, Elements);
+                        UpdateList();
+                    }
                 }
             }
             else if (mode == Mode.Remove)
             {
                 int index = listBox1.SelectedIndex;
-                var newList = ListManipulation.RemoveElement<string>(index,
-                        ListModule.OfSeq(Elements));
-                Elements = newList.ToList();
+                Elements = myList.RemoveElementToList(index, Elements);
                 UpdateList();
                 mode = Mode.Insert;
                 button1.Text = "Add";
