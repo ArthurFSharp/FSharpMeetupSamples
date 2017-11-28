@@ -4,7 +4,8 @@
     <TargetFramework>net461</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="App.Suave.fs" />
+    <Compile Include="View.fs" />
+    <Compile Include="App.Suave.fs" />    
   </ItemGroup>
   <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>
